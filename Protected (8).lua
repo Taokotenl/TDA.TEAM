@@ -1,3 +1,105 @@
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") end
+        
+    wait(1)
+    
+    do
+        local ui = game.CoreGui:FindFirstChild("UlLib")
+        if ui then
+            ui:Destroy()
+        end
+    end
+    
+    local UserInputService = game:GetService("UserInputService")
+    local TweenService = game:GetService("TweenService")
+    
+    local function MakeDraggable(topbarobject, object)
+        local Dragging = nil
+        local DragInput = nil
+        local DragStart = nil
+        local StartPosition = nil
+    
+        local function Update(input)
+            local Delta = input.Position - DragStart
+            local pos =
+                UDim2.new(
+                    StartPosition.X.Scale,
+                    StartPosition.X.Offset + Delta.X,
+                    StartPosition.Y.Scale,
+                    StartPosition.Y.Offset + Delta.Y
+                )
+            local Tween = TweenService:Create(object, TweenInfo.new(0.2), {Position = pos})
+            Tween:Play()
+        end
+    
+        topbarobject.InputBegan:Connect(
+            function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    Dragging = true
+                    DragStart = input.Position
+                    StartPosition = object.Position
+    
+                    input.Changed:Connect(
+                        function()
+                            if input.UserInputState == Enum.UserInputState.End then
+                                Dragging = false
+                            end
+                        end
+                    )
+                end
+            end
+        )
+    
+        topbarobject.InputChanged:Connect(
+            function(input)
+                if
+                    input.UserInputType == Enum.UserInputType.MouseMovement or
+                    input.UserInputType == Enum.UserInputType.Touch
+                then
+                    DragInput = input
+                end
+            end
+        )
+    
+        UserInputService.InputChanged:Connect(
+            function(input)
+                if input == DragInput and Dragging then
+                    Update(input)
+                end
+            end
+        )
+    end
+    
+        game:GetService("Players").LocalPlayer.Idled:connect(function()
+        game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+    
+    local ScreenGui = Instance.new("ScreenGui")
+    local Toggle = Instance.new("TextButton")
+    
+    ScreenGui.Name = "ScreenGui"
+    ScreenGui.Parent = game.CoreGui
+    
+    Toggle.Name = "Toggle"
+    Toggle.Parent = ScreenGui
+    Toggle.BackgroundColor3 = Color3.fromRGB(193, 192, 203)
+    Toggle.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+    Toggle.Size = UDim2.new(0, 190, 0, 60)
+    Toggle.Font = Enum.Font.Code
+    Toggle.Text = "TDA TEAM"
+    Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Toggle.TextScaled = true
+    Toggle.MouseButton1Down:connect(function()
+    end)
+wait(0.1)
+local A_1 = "Make Script By TDA TEAM" local A_2 = "All" 
+local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2)
+wait(2.1)
+local A_1 = "TDA TEAM!" local A_2 = "All" 
+local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2)
+
+
 --[[
 Only 3 Games are supported at the moment:
 -Auto Rap Battles
