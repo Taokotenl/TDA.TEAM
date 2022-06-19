@@ -1,4 +1,4 @@
-
+repeat task.wait()until game:IsLoaded()if not IrisNotificationMrJack then loadstring(game:HttpGet"https://raw.githubusercontent.com/thedragonslayer2/hey/main/Misc./iris%20notification%20function")()elseif IrisNotificationUserMrJack then IrisNotificationUserMrJack.ClearAllNotifications()end;IrisNotificationMrJack(1,"TDA TEAM","Script By TDA TEAM",9e9)task.wait(0.4)getgenv().gameslink="https://raw.githubusercontent.com/thedragonslayer2/Supported-Games/main/Mr%20Jack"
 
 --[[
 Only 3 Games are supported at the moment:
